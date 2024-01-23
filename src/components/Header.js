@@ -8,12 +8,14 @@ import deliveryBtn from '../assets/ic_DeliveryBtn.svg';
 import keepBtn from '../assets/ic_KeepBtn.svg';
 import cartBtn from '../assets/ic_CartBtn.svg';
 import downBtn from '../assets/ic_downBtn.png';
+import CategoryImg from '../assets/ic_categoryImg.svg';
 
 const Header = () => {
     const [isHovering, setIsHovering] = useState(false);
     const [search, setSearch] = useState('');
 
     const MoreMenuTitle = ['공지사항', '자주하는 질문', '1:1 문의', '대량주문 문의'];
+    const ProductMenuTitle = ['신상품', '베스트', '알뜰쇼핑', '특가/혜택'];
 
     const onChange = (e) => {
         setSearch(e.target.value);
@@ -65,11 +67,29 @@ const Header = () => {
                         <SearchBtn src={searchBtn}/>
                     </SearchContainer>
                     <IconContainer>
-                        <DeliveryIcon src={deliveryBtn}/>
-                        <KeepIcon src={keepBtn}/>
+                        <DeliveryKeepIcon src={deliveryBtn}/>
+                        <DeliveryKeepIcon src={keepBtn}/>
                         <CartIcon src={cartBtn}/>
                     </IconContainer>
                 </HeaderMid>
+                <HeaderBottom>
+                    <HeaderSubBottom>
+                        <CategoryContainer>
+                            <CateImg src={CategoryImg}/>
+                            <CateText> 카테고리 </CateText>
+                        </CategoryContainer>
+                        <ProductMenuList>
+                            {ProductMenuTitle.map((item) => (
+                                <ProductMenuItem>
+                                    <ProductMenuText> {item} </ProductMenuText>
+                                </ProductMenuItem>
+                            ))}
+                        </ProductMenuList>
+                        <DeliveryNotice>
+                            <NoticeText> 샛별・하루 </NoticeText> &nbsp; 배송안내
+                        </DeliveryNotice>
+                    </HeaderSubBottom>
+                </HeaderBottom>
             </SubContainer>
         </Container>
     )
@@ -151,12 +171,14 @@ const SubHeaderMid = styled.div`
     height: 63px;
 `;
 const TitleImg = styled.img`
+    flex: 0 0 82px;
     cursor: pointer;
 `;
 const TitleText = styled.p`
     font-weight: 500;
     color: ${palette.main};
 
+    flex-shrink: 0;
     margin-left: 20px;
     font-size: 19px;
     line-height: 1.33;
@@ -179,15 +201,19 @@ const SearchContainer = styled.div`
     box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
 `;
 const InputBox = styled.input`
+    width: 300px;
     border: none;
-    margin-top: 2px;
     outline: none;      // 파란선 없애기
-
-    font: inherit;
+    margin-top: 2px;
+    
+    font-size: 17px;
+    letter-spacing: -0.33px;
 `;
 const SearchBtn = styled.img`
     position: relative;
     margin: 8px;
+    background: 0px 0px no-repeat;
+    cursor: pointer;
 `;
 const IconContainer = styled.div`
     display: flex;
@@ -196,21 +222,90 @@ const IconContainer = styled.div`
     right: -6px;
     top: 49px;
 `;
-const DeliveryIcon = styled.img`
+const DeliveryKeepIcon = styled.img`
     width: 36px;
     height: 36px;
     margin-right: 20px;
-    cursor: pointer;
-`;
-const KeepIcon = styled.img`
-    width: 36px;
-    height: 36px;
-    margin-right: 20px;
+    background: 50% 50% no-repeat;
     cursor: pointer;
 `;
 const CartIcon = styled.img`
     width: 36px;
     height: 36px;
     cursor: pointer;
+`;
+// 헤더 최하단
+const HeaderBottom = styled.div`
+    min-width: 1050px;
+    width: 100%;
+    letter-spacing: -0.3px;
+    background-color: ${palette.white};
+    position: relative;
+    margin-top: -30px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
+`;
+const HeaderSubBottom = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 1050px;
+    height: 56px;
+    margin: 0px auto;
+`;
+const CategoryContainer = styled.div`
+    display: flex;
+    align-items: center;
+    height: 100%;
+`;
+const CateImg = styled.img`
+    width: 20px;
+    height: 14px;
+    margin-bottom: 3px;
+    margin-right: 14px;
+`;
+const CateText = styled.p`
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    letter-spacing: -0.3px;
+    color: rgb(51, 51, 51);
+`;
+const ProductMenuList = styled.ul`
+    display: flex;
+    /* margin-left: 30px; */
+    margin: 0 auto;
+`;
+const ProductMenuItem = styled.li`
+    display: flex;
+    justify-content: center;
+    width: 150px;
+    height: 55px;
+    line-height: 20px;
+    text-align: center;
+`;
+const ProductMenuText = styled.p`
+    height: fit-content;
+    font-size: 18px;
+    font-weight: 500;
+    color: rgb(51, 51, 51);
+    cursor: pointer;
+`;
+const DeliveryNotice = styled.div`
+    display: flex;
+    align-items: center;
+
+    height: 32px;
+    padding: 1px 14px 0 14px;
+    border-radius: 18px;
+    border: 1.5px solid rgb(238, 238, 238);
+    color: rgb(102, 102, 102);
+    font-size: 14px;
+    line-height: 16px;
+    letter-spacing: -0.32px;
+`;
+const NoticeText = styled.p`
+    font-weight: 500;
+    color: ${palette.main};
 `;
 export default Header;
