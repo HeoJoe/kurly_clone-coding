@@ -7,31 +7,41 @@ import searchBtn from '../assets/ic_SearchBtn.svg'
 import deliveryBtn from '../assets/ic_DeliveryBtn.svg';
 import keepBtn from '../assets/ic_KeepBtn.svg';
 import cartBtn from '../assets/ic_CartBtn.svg';
+import downBtn from '../assets/ic_downBtn.png';
 
 const Header = () => {
-    const [clicked, setClicked] = useState('signUp');
+    const [close, setClose] = useState(false);
     const [search, setSearch] = useState('');
+
+    const MoreMenuTitle = ['공지사항', '자주하는 질문', '1:1 문의', '대량주문 문의'];
 
     const onChange = (e) => {
         setSearch(e.target.value);
     }
-    const clickMenu = ( value ) => setClicked(value);
+
+    const showMenu = () => setClose(true);
+    const hideMenu = () => setClose(false);
 
     return (
         <Container>
             <SubContainer>
                 <HeaderTop>
-                    <SubMenu 
-                        className={clicked === 'signUp' ? 'click' : 'notClick'}
-                        onClick={() => clickMenu('signUp')}> 회원가입 </SubMenu>
+                    <SubMenu style={{ color: `${palette.main}` }}> 회원가입 </SubMenu>
                     <GrayLine/>
-                    <SubMenu 
-                        className={clicked === 'signIn' ? 'click' : 'notClick'}
-                        onClick={() => clickMenu('signIn')}> 로그인 </SubMenu>
+                    <SubMenu> 로그인 </SubMenu>
                     <GrayLine/>
-                    <SubMenu 
-                        className={clicked === 'inquiry' ? 'click' : 'notClick'}
-                        onClick={() => clickMenu('inquiry')}> 고객센터 </SubMenu>
+                    <CustomerService>
+                        <SubMenu> 고객센터 </SubMenu>
+                        <MoreBtn 
+                        onMouseOver={showMenu}
+                        // onMouseLeave={hideMenu}
+                        src={downBtn}/>
+                        <MoreMenuList close={close}>
+                            {MoreMenuTitle.map((item) => (
+                                <MoreMenu> {item} </MoreMenu>
+                            ))}
+                        </MoreMenuList>
+                    </CustomerService>
                 </HeaderTop>
                 <HeaderMid>
                     <SubHeaderMid>
@@ -58,8 +68,8 @@ const Header = () => {
     )
 }
 const Container = styled.div`
-    box-sizing: border-box;
-    margin: 0;
+    /* box-sizing: border-box;
+    margin: 0; */
 `;
 const SubContainer = styled.div`
     position: relative;
@@ -70,19 +80,16 @@ const SubContainer = styled.div`
 `;
 // 헤더 최상단
 const HeaderTop = styled.div`
-    top: 0px;
-    right: 0px;
     display: flex;
     position: absolute;
-    box-sizing: border-box;
-    margin: 0;
-    padding: 0;
+    top: 0px;
+    right: 0px;
+    align-items: center;
+    font-size: 13px;
 `;
 // 회원가입-로그인-고객센터
 const SubMenu = styled.div`
-    color: ${(props) => props.className === 'click' ? `${palette.main}` : `${palette.sub}`};
-    font-size: 12px;
-
+    color: ${palette.sub};
     display: block;
     cursor: pointer;
 `;
@@ -91,6 +98,40 @@ const GrayLine = styled.div`
     height: 13px;
     margin: 0px 12px;
     background-color: rgb(217, 217, 217);
+`;
+const CustomerService = styled.div`
+    line-height: 35px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+const MoreBtn = styled.img`
+    width: 8px;
+    height: 5px;
+    background-size: cover;
+    background-position: center center;
+    display: inline-block;
+    margin-left: 5px;
+    margin-bottom: 1px;
+    cursor: pointer;
+`;
+const MoreMenuList = styled.div`
+    display: ${(props) => (props.close ? 'block' : 'none')};
+    position: absolute;
+    width: 130px;
+    top: 34px;
+    right: 0px;
+    padding: 3px 9px;
+    border: 1.5px solid #D9D9D9;
+    background-color: ${palette.white};
+    z-index: 100;
+`;
+const MoreMenu = styled.div`
+    display: block;
+    height: 24px;
+    line-height: 24px;
+    cursor: pointer;
 `;
 // 헤더 중간 부분
 const HeaderMid = styled.div`
@@ -110,7 +151,7 @@ const TitleText = styled.p`
     color: ${palette.main};
 
     margin-left: 20px;
-    font-size: 18px;
+    font-size: 19px;
     line-height: 1.33;
     cursor: pointer;
 `;
