@@ -10,7 +10,7 @@ import cartBtn from '../assets/ic_CartBtn.svg';
 import downBtn from '../assets/ic_downBtn.png';
 
 const Header = () => {
-    const [close, setClose] = useState(false);
+    const [isHovering, setIsHovering] = useState(false);
     const [search, setSearch] = useState('');
 
     const MoreMenuTitle = ['공지사항', '자주하는 질문', '1:1 문의', '대량주문 문의'];
@@ -19,8 +19,13 @@ const Header = () => {
         setSearch(e.target.value);
     }
 
-    const showMenu = () => setClose(true);
-    const hideMenu = () => setClose(false);
+    const handleMouseOver = () => {
+        setIsHovering(true);
+    };
+
+    const handleMouseOut = () => {
+        setIsHovering(false);
+    };
 
     return (
         <Container>
@@ -33,10 +38,12 @@ const Header = () => {
                     <CustomerService>
                         <SubMenu> 고객센터 </SubMenu>
                         <MoreBtn 
-                        onMouseOver={showMenu}
-                        // onMouseLeave={hideMenu}
-                        src={downBtn}/>
-                        <MoreMenuList close={close}>
+                            onMouseOver={handleMouseOver}
+                            onMouseOut={handleMouseOut}
+                            src={downBtn}/>
+                        <MoreMenuList 
+                            className={isHovering ? 'open' : 'close'}
+                            close={isHovering}>
                             {MoreMenuTitle.map((item) => (
                                 <MoreMenu> {item} </MoreMenu>
                             ))}
@@ -117,7 +124,7 @@ const MoreBtn = styled.img`
     cursor: pointer;
 `;
 const MoreMenuList = styled.div`
-    display: ${(props) => (props.close ? 'block' : 'none')};
+    display: ${(props) => (props.className === 'open' ? 'block' : 'none')};
     position: absolute;
     width: 130px;
     top: 34px;
