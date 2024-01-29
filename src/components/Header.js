@@ -72,6 +72,7 @@ const Header = () => {
                         <CartIcon src={cartBtn}/>
                     </IconContainer>
                 </HeaderMid>
+                </SubContainer>
                 <HeaderBottom>
                     <HeaderSubBottom>
                         <CategoryContainer>
@@ -90,17 +91,22 @@ const Header = () => {
                         </DeliveryNotice>
                     </HeaderSubBottom>
                 </HeaderBottom>
-            </SubContainer>
+            
         </Container>
     )
 }
 const Container = styled.div`
     /* box-sizing: border-box;
     margin: 0; */
+    position: fixed;
+    width: 100%;
+    top: 0;
+    
 `;
 const SubContainer = styled.div`
     position: relative;
-    width: 1050px;
+    max-width: 1050px;
+    width: 100%;
     height: 100px;
     margin: 0px auto;
     letter-spacing: -0.3px;
@@ -112,7 +118,8 @@ const HeaderTop = styled.div`
     top: 0px;
     right: 0px;
     align-items: center;
-    font-size: 13px;
+    font-size: 12.5px;
+    z-index: 320;
 `;
 // 회원가입-로그인-고객센터
 const SubMenu = styled.div`
@@ -172,7 +179,6 @@ const SubHeaderMid = styled.div`
 `;
 const TitleImg = styled.img`
     flex: 0 0 82px;
-    cursor: pointer;
 `;
 const TitleText = styled.p`
     font-weight: 500;
@@ -241,8 +247,8 @@ const HeaderBottom = styled.div`
     letter-spacing: -0.3px;
     background-color: ${palette.white};
     position: relative;
-    margin-top: -30px;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
+    z-index: 300;
 `;
 const HeaderSubBottom = styled.div`
     position: relative;
