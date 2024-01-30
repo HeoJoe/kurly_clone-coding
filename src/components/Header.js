@@ -8,10 +8,12 @@ import deliveryBtn from '../assets/ic_DeliveryBtn.svg';
 import keepBtn from '../assets/ic_KeepBtn.svg';
 import cartBtn from '../assets/ic_CartBtn.svg';
 import downBtn from '../assets/ic_downBtn.png';
+import searchImg from '../assets/img_SearchImg.png'
 import CategoryImg from '../assets/ic_categoryImg.svg';
 
 const Header = () => {
-    const [isHovering, setIsHovering] = useState(false);
+    const [isHoverMenu, setIsHoverMenu] = useState(false);
+    const [isHoverDelivery, setIsHoverDelivery] = useState(false);
     const [search, setSearch] = useState('');
 
     const MoreMenuTitle = ['공지사항', '자주하는 질문', '1:1 문의', '대량주문 문의'];
@@ -21,13 +23,11 @@ const Header = () => {
         setSearch(e.target.value);
     }
 
-    const handleMouseOver = () => {
-        setIsHovering(true);
-    };
+    const handleMouseOverMenu = () => setIsHoverMenu(true);
+    const handleMouseOutMenu = () => setIsHoverMenu(false);
 
-    const handleMouseOut = () => {
-        setIsHovering(false);
-    };
+    const handleMouseOverDeli = () => setIsHoverDelivery(true);
+    const handleMouseOutDeli = () => setIsHoverDelivery(false);
 
     return (
         <Container>
@@ -40,12 +40,12 @@ const Header = () => {
                     <CustomerService>
                         <SubMenu> 고객센터 </SubMenu>
                         <MoreBtn 
-                            onMouseOver={handleMouseOver}
-                            onMouseOut={handleMouseOut}
+                            onMouseOver={handleMouseOverMenu}
+                            onMouseOut={handleMouseOutMenu}
                             src={downBtn}/>
                         <MoreMenuList 
-                            className={isHovering ? 'open' : 'close'}
-                            close={isHovering}>
+                            className={isHoverMenu ? 'open' : 'close'}
+                            close={isHoverMenu}>
                             {MoreMenuTitle.map((item) => (
                                 <MoreMenu> {item} </MoreMenu>
                             ))}
@@ -67,7 +67,33 @@ const Header = () => {
                         <SearchBtn src={searchBtn}/>
                     </SearchContainer>
                     <IconContainer>
-                        <DeliveryKeepIcon src={deliveryBtn}/>
+                        <DeliveryKeepIcon 
+                            src={deliveryBtn}
+                            onMouseOver={handleMouseOverDeli}
+                            onMouseOut={handleMouseOutDeli}
+                        />
+                        <DeliveryMenu 
+                            className={isHoverDelivery ? 'open' : 'close'}
+                            close={isHoverDelivery}>
+                                <DeliveryArea> 
+                                    <DeliverySubArea>
+                                        <DeliveryTextArea>
+                                            <DeliveryFirstText> 배송지를 등록</DeliveryFirstText>
+                                            하고
+                                            <br/>
+                                            <DeliverySecText> 구매 가능한 상품을 확인하세요! </DeliverySecText>
+                                        </DeliveryTextArea>
+                                        <DeliveryBtnArea>
+                                            <DeliveryLoginBtn> 로그인 </DeliveryLoginBtn>
+                                            <DeliveryAddressBtn> 
+                                                <AddressImg src={searchImg}/>
+                                                주소 검색 
+                                            </DeliveryAddressBtn>
+                                        </DeliveryBtnArea>
+                                    </DeliverySubArea>
+
+                                </DeliveryArea>
+                        </DeliveryMenu>
                         <DeliveryKeepIcon src={keepBtn}/>
                         <CartIcon src={cartBtn}/>
                     </IconContainer>
@@ -234,6 +260,90 @@ const DeliveryKeepIcon = styled.img`
     margin-right: 20px;
     background: 50% 50% no-repeat;
     cursor: pointer;
+`;
+const DeliveryMenu = styled.div`
+    display: ${(props) => (props.className === 'open' ? 'block' : 'none')};
+    position: absolute;
+    inset: 0px auto auto 0px;
+    margin: 0px;
+    transform: translate3d(18px, 36px, 0px);
+    z-index: 400;
+`;
+const DeliveryArea = styled.div`
+    opacity: 1;
+    transition: opacity 1ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+`;
+const DeliverySubArea = styled.div`
+    position: absolute;
+    right: -124px;
+    top: 14px;
+    width: 267px;
+    padding: 18px 17px 17px;
+    border: 1px solid rgb(221, 221, 221);
+    background-color: ${palette.white};
+
+    ::before {
+        content: "";
+        position: absolute;
+        left: 125px;
+        top: -20px;
+        width: 36px;
+        height: 36px;
+    }
+`;
+const DeliveryTextArea = styled.strong`
+    font-weight: 500;
+    font-size: 16px;
+    /* color: rgb(51, 51, 51); */
+    line-height: 24px;
+    letter-spacing: 0.32px;
+`;
+const DeliveryFirstText = styled.strong`
+    font-weight: 400;
+    color: ${palette.main};
+`;
+const DeliverySecText = styled.div``;
+const DeliveryBtnArea = styled.div`
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    padding-top: 11px;
+`;
+const DeliveryLoginBtn = styled.button`
+    white-space: nowrap;
+    display: block;
+    padding: 0px 10px;
+    padding-bottom: 1px;
+    text-align: center;
+    overflow: hidden;
+    width: 80px;
+    height: 36px;
+    border-radius: 3px;
+    color: rgb(95, 0, 128);
+    background-color: ${palette.white}
+    border: 1px solid ${palette.main}
+    font-weight: 500;
+    font-size: 12px;
+`;
+const DeliveryAddressBtn = styled.button`
+    display: block;
+    padding: 0px 10px;
+    text-align: center;
+    overflow: hidden;
+    width: 145px;
+    height: 36px;
+    border-radius: 3px;
+    color: ${palette.white};
+    background-color: ${palette.main};
+    border: 0px none;
+    font-weight: 500;
+    font-size: 12px;
+`;
+const AddressImg = styled.img`
+    width: 20px;
+    height: 20px;
+    margin-left: -9px;
+    vertical-align: -5px;
 `;
 const CartIcon = styled.img`
     width: 36px;
