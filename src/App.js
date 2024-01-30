@@ -19,8 +19,10 @@ const App = () => {
 };
 
 const Container = styled.div`
-    background-color: transparent;
+    box-sizing: border-box;
     height: 100%;
+    margin: 0;
+    background-color: transparent;
 `;
 
 export default App;

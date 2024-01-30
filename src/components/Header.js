@@ -91,43 +91,40 @@ const Header = () => {
                                             </DeliveryAddressBtn>
                                         </DeliveryBtnArea>
                                     </DeliverySubArea>
-
                                 </DeliveryArea>
                         </DeliveryMenu>
                         <DeliveryKeepIcon src={keepBtn}/>
                         <CartIcon src={cartBtn}/>
                     </IconContainer>
                 </HeaderMid>
-                </SubContainer>
-                <HeaderBottom>
-                    <HeaderSubBottom>
-                        <CategoryContainer>
-                            <CateImg src={CategoryImg}/>
-                            <CateText> 카테고리 </CateText>
-                        </CategoryContainer>
-                        <ProductMenuList>
-                            {ProductMenuTitle.map((item) => (
-                                <ProductMenuItem>
-                                    <ProductMenuText> {item} </ProductMenuText>
-                                </ProductMenuItem>
-                            ))}
-                        </ProductMenuList>
-                        <DeliveryNotice>
-                            <NoticeText> 샛별・하루 </NoticeText> &nbsp; 배송안내
-                        </DeliveryNotice>
-                    </HeaderSubBottom>
-                </HeaderBottom>
-            
+            </SubContainer>
+            <HeaderBottom>
+                <HeaderSubBottom>
+                    <CategoryContainer>
+                        <CateImg src={CategoryImg}/>
+                        <CateText> 카테고리 </CateText>
+                    </CategoryContainer>
+                    <ProductMenuList>
+                        {ProductMenuTitle.map((item) => (
+                            <ProductMenuItem>
+                                <ProductMenuText> {item} </ProductMenuText>
+                            </ProductMenuItem>
+                        ))}
+                    </ProductMenuList>
+                    <DeliveryNotice>
+                        <NoticeText> 샛별・하루 </NoticeText> &nbsp; 배송안내
+                    </DeliveryNotice>
+                </HeaderSubBottom>
+             </HeaderBottom>
         </Container>
     )
 }
 const Container = styled.div`
-    /* box-sizing: border-box;
-    margin: 0; */
-    position: fixed;
-    width: 100%;
-    top: 0;
-    
+    /* position: absolute; */
+    /* width: 100%; */
+    /* top: 0;
+    left: 0; */
+    margin: 0;
 `;
 const SubContainer = styled.div`
     position: relative;

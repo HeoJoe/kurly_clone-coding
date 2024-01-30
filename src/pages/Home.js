@@ -1,11 +1,16 @@
 import styled from "styled-components";
+import AdBanner from "../components/AdBanner";
+import Header from "../components/Header";
 
 const Home = () => {
     return (
-        <Container> 홈 </Container>
+        <Container>
+            <AdBanner/>
+        </Container>
     );
 }
 const Container = styled.div`
-    margin-top: 170px;
+    /* width: 100%; */
+    margin: 0;
 `;
 export default Home;
