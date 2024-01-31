@@ -10,10 +10,12 @@ import cartBtn from '../assets/ic_CartBtn.svg';
 import downBtn from '../assets/ic_downBtn.png';
 import searchImg from '../assets/img_SearchImg.png'
 import CategoryImg from '../assets/ic_categoryImg.svg';
+import CategoryList from './CategoryList';
 
 const Header = () => {
     const [isHoverMenu, setIsHoverMenu] = useState(false);
     const [isHoverDelivery, setIsHoverDelivery] = useState(false);
+    const [isHoverCategory, setIsHoverCategory] = useState(false);
     const [search, setSearch] = useState('');
 
     const MoreMenuTitle = ['공지사항', '자주하는 질문', '1:1 문의', '대량주문 문의'];
@@ -28,6 +30,9 @@ const Header = () => {
 
     const handleMouseOverDeli = () => setIsHoverDelivery(true);
     const handleMouseOutDeli = () => setIsHoverDelivery(false);
+
+    const handleMouseOverCate = () => setIsHoverCategory(true);
+    const handleMouseOutCate = () => setIsHoverCategory(false);
 
     return (
         <Container>
@@ -100,9 +105,13 @@ const Header = () => {
             </SubContainer>
             <HeaderBottom>
                 <HeaderSubBottom>
-                    <CategoryContainer>
+                    <CategoryContainer
+                        onMouseOver={handleMouseOverCate}
+                        onMouseOut={handleMouseOutCate}
+                    >
                         <CateImg src={CategoryImg}/>
                         <CateText> 카테고리 </CateText>
+                        {isHoverCategory && <CategoryList/>}
                     </CategoryContainer>
                     <ProductMenuList>
                         {ProductMenuTitle.map((item) => (
@@ -120,10 +129,7 @@ const Header = () => {
     )
 }
 const Container = styled.div`
-    /* position: absolute; */
-    /* width: 100%; */
-    /* top: 0;
-    left: 0; */
+    box-sizing: border-box;
     margin: 0;
 `;
 const SubContainer = styled.div`
@@ -370,6 +376,7 @@ const CategoryContainer = styled.div`
     display: flex;
     align-items: center;
     height: 100%;
+    cursor: pointer;
 `;
 const CateImg = styled.img`
     width: 20px;

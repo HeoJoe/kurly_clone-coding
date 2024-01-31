@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from 'swiper/react';
+import palette from "../styles/palette";
 
 import banner1 from '../assets/BannerImg/banner1.jpg';
 import banner2 from '../assets/BannerImg/banner2.jpg';
@@ -30,13 +31,18 @@ const AdBanner = () => {
             </Swiper>
             <LeftBtn src={ArrowBtn}/>
             <RighttBtn src={ArrowBtn}/>
-
+            <SequenceArea>
+                1 / 4
+            </SequenceArea>
         </Container>
     )
 }
 const Container = styled.div`
+    box-sizing: content-box;
     position: relative;
     height: 370px;
+    width: 100%;
+    /* height: 100%; */
     margin: 0px auto 40px;
     overflow: hidden;
     list-style: none;
@@ -45,6 +51,8 @@ const Container = styled.div`
 `;
 const SlideImg = styled.img`
     width: 100%;
+    height: 100%;
+    object-fit: cover;
     cursor: pointer;
 `;
 const LeftBtn = styled.img`
@@ -74,5 +82,22 @@ const RighttBtn = styled.img`
     opacity: 1;
     transform: rotate(0deg);
     cursor: pointer;
+`;
+const SequenceArea = styled.div`
+    position: absolute;
+    color: ${palette.white};
+    background-color: rgba(0, 0, 0, 0.15);
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 55px;
+    height: 23px;
+    right: 330px;
+    bottom: 20px;
+    line-height: 23px;
+    font-size: 14px;
+    font-weight: 400;
+    border-radius: 12px;
 `;
 export default AdBanner;
