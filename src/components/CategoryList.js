@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import palette from "../styles/palette";
 
@@ -6,6 +7,7 @@ import categoryImg2Ori from '../assets/img_categoryImg2_ori.png';
 import categoryImg1Click from '../assets/img_categoryImg1_click.png';
 
 const CategoryList = () => {
+    const [isClicked, setIsClicked] = useState(false);
     const SubCategoryTitle = ['친환경', '제철과일', '국산과일','수입과일', '간편과일', '냉동·건과일', '견과류', '쌀·잡곡'];
 
     return (
