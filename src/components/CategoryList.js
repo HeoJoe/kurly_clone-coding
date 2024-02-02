@@ -10,11 +10,15 @@ const CategoryList = () => {
     const [isClicked, setIsClicked] = useState(false);
     const SubCategoryTitle = ['친환경', '제철과일', '국산과일','수입과일', '간편과일', '냉동·건과일', '견과류', '쌀·잡곡'];
 
+    const clickEvent = () => {
+        setIsClicked(!isClicked);
+    }
+
     return (
         <Container>
             <SubContainer>
                 <CateList>
-                    <CategoryItem>
+                    <CategoryItem onClick={clickEvent}>
                         <CategoryItemIcon src={categoryImg1Ori}/>
                         <CategoryTitleText> 과일·견과·쌀 </CategoryTitleText>
                         <SubCategoryList>
@@ -23,7 +27,7 @@ const CategoryList = () => {
                             ))}
                         </SubCategoryList>
                     </CategoryItem>
-                    <CategoryItem>
+                    <CategoryItem onClick={clickEvent}>
                         <CategoryItemIcon src={categoryImg2Ori}/>
                         <CategoryTitleText> 컬리의 추천 </CategoryTitleText>
                     </CategoryItem>
