@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import styled from 'styled-components';
 import palette from '../styles/palette';
 
 import titleImg from '../assets/img_TitleImg.svg'
 import searchBtn from '../assets/ic_SearchBtn.svg'
+import cancelBtn from '../assets/ic_cancelBtn.svg';
 import deliveryBtn from '../assets/ic_DeliveryBtn.svg';
 import keepBtn from '../assets/ic_KeepBtn.svg';
 import cartBtn from '../assets/ic_CartBtn.svg';
@@ -23,16 +24,30 @@ const Header = () => {
 
     const onChange = (e) => {
         setSearch(e.target.value);
-    }
+    };
 
-    const handleMouseOverMenu = () => setIsHoverMenu(true);
-    const handleMouseOutMenu = () => setIsHoverMenu(false);
+    const onClickRemoveBtn = () => {
+        setSearch('');
+    };
 
-    const handleMouseOverDeli = () => setIsHoverDelivery(true);
-    const handleMouseOutDeli = () => setIsHoverDelivery(false);
+    const handleMouseOver = ( name ) => {
+        if (name === 'menu') 
+            setIsHoverMenu(true);
+        if (name === 'deli') 
+            setIsHoverDelivery(true);
+        if (name === 'cate') 
+            setIsHoverCategory(true);
 
-    const handleMouseOverCate = () => setIsHoverCategory(true);
-    const handleMouseOutCate = () => setIsHoverCategory(false);
+    };
+
+    const handleMouseOut = ( name ) => {
+        if (name === 'menu') 
+            setIsHoverMenu(false);
+        if (name === 'deli') 
+            setIsHoverDelivery(false);
+        if (name === 'cate') 
+            setIsHoverCategory(false);
+    };
 
     return (
         <Container>
@@ -45,8 +60,8 @@ const Header = () => {
                     <CustomerService>
                         <SubMenu> 고객센터 </SubMenu>
                         <MoreBtn 
-                            onMouseOver={handleMouseOverMenu}
-                            onMouseOut={handleMouseOutMenu}
+                            onMouseOver={() => handleMouseOver('menu')}
+                            onMouseOut={() => handleMouseOut('menu')}
                             src={downBtn}/>
                         <MoreMenuList 
                             className={isHoverMenu ? 'open' : 'close'}
@@ -69,13 +84,18 @@ const Header = () => {
                             placeholder='검색어를 입력해주세요'
                             onChange={onChange}
                         />
+                        <CancelBtn 
+                            src={cancelBtn}
+                            className={search ? 'open' : 'hide'}
+                            onClick={onClickRemoveBtn}
+                        />
                         <SearchBtn src={searchBtn}/>
                     </SearchContainer>
                     <IconContainer>
                         <DeliveryKeepIcon 
                             src={deliveryBtn}
-                            onMouseOver={handleMouseOverDeli}
-                            onMouseOut={handleMouseOutDeli}
+                            onMouseOver={() => handleMouseOver('deli')}
+                            onMouseOut={() => handleMouseOut('deli')}
                         />
                         <DeliveryMenu 
                             className={isHoverDelivery ? 'open' : 'close'}
@@ -106,8 +126,8 @@ const Header = () => {
             <HeaderBottom>
                 <HeaderSubBottom>
                     <CategoryContainer
-                        onMouseOver={handleMouseOverCate}
-                        onMouseOut={handleMouseOutCate}
+                        onMouseOver={() => handleMouseOver('cate')}
+                        onMouseOut={() => handleMouseOut('cate')}
                     >
                         <CateImg src={CategoryImg}/>
                         <CateText> 카테고리 </CateText>
@@ -243,6 +263,17 @@ const InputBox = styled.input`
     
     font-size: 17px;
     letter-spacing: -0.33px;
+`;
+const CancelBtn = styled.img`
+    position: absolute;
+    display: ${(props) => (props.className === 'open' ? 'block' : 'none')};
+    top: 50%;
+    transform: translateY(-50%);
+    width: 16px;
+    height: 16px;
+    right: 47px;
+    margin-left: 20px;
+    cursor: pointer;
 `;
 const SearchBtn = styled.img`
     position: relative;
