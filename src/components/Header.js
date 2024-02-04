@@ -350,12 +350,12 @@ const DeliveryLoginBtn = styled.button`
     padding-bottom: 1px;
     text-align: center;
     overflow: hidden;
-    width: 80px;
+    width: 110px;
     height: 36px;
     border-radius: 3px;
     color: rgb(95, 0, 128);
-    background-color: ${palette.white}
-    border: 1px solid ${palette.main}
+    background-color: ${palette.white};
+    border: 1px solid ${palette.main};
     font-weight: 500;
     font-size: 12px;
 `;
