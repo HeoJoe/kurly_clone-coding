@@ -94,8 +94,8 @@ const Header = () => {
                     <IconContainer>
                         <DeliveryKeepIcon 
                             src={deliveryBtn}
-                            onMouseOver={() => handleMouseOver('deli')}
-                            // onMouseOut={() => handleMouseOut('deli')}
+                            onMouseMove={() => handleMouseOver('deli')}
+                            onMouseOut={() => handleMouseOut('deli')}
                         />
                         <DeliveryMenu 
                             className={isHoverDelivery ? 'open' : 'close'}
