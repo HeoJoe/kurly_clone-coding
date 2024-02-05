@@ -7,29 +7,54 @@ import categoryImg2Ori from '../assets/img_categoryImg2_ori.png';
 import categoryImg1Click from '../assets/img_categoryImg1_click.png';
 
 const CategoryList = () => {
-    const [isClicked, setIsClicked] = useState(false);
-    const SubCategoryTitle = ['친환경', '제철과일', '국산과일','수입과일', '간편과일', '냉동·건과일', '견과류', '쌀·잡곡'];
+    const [isHoverFruit, setIsHoverFruit] = useState(false);
+    const [isHoverPick, setISHoverPick] = useState(false);
 
-    const clickEvent = () => {
-        setIsClicked(!isClicked);
-    }
+    const SubCategoryFirst = ['친환경', '제철과일', '국산과일','수입과일', '간편과일', '냉동·건과일', '견과류', '쌀·잡곡'];
+    const SubCategorySec = ['홈캉스', '식단관리', '간편한 아침식사', '재구매 BEST', '3천원의 행복', '컬리마트', '대용량 상품', '캠핑', '1인 가구', '비건', '베이커리 맛집', '오프라인 맛집', 
+'컬리가 만든 상품', 'Kurly Only', 'KF365/KS365', '희소가치 프로젝트'];
+
+const handleMouseOver = ( name ) => {
+    if (name === 'fruit') 
+        setIsHoverFruit(true);
+    if (name === 'pick')
+        setISHoverPick(true);
+};
+
+const handleMouseOut = ( name ) => {
+    if (name === 'fruit') 
+        setIsHoverFruit(false);
+    if (name === 'pick')
+        setISHoverPick(false);
+};
 
     return (
         <Container>
             <SubContainer>
                 <CateList>
-                    <CategoryItem onClick={clickEvent}>
-                        <CategoryItemIcon src={categoryImg1Ori}/>
+                    <CategoryItem
+                        onMouseOver={() => handleMouseOver('fruit')}
+                        onMouseOut={() => handleMouseOut('fruit')}>
+                        <CategoryItemIcon src={isHoverFruit ? categoryImg1Click : categoryImg1Ori}/>
                         <CategoryTitleText> 과일·견과·쌀 </CategoryTitleText>
-                        <SubCategoryList>
-                            {SubCategoryTitle.map((item) => (
+                        <SubCategoryList
+                            className={isHoverFruit ? 'open' : 'hide'}>
+                            {SubCategoryFirst.map((item) => (
                                 <SubCategoryItem> {item} </SubCategoryItem>
                             ))}
                         </SubCategoryList>
                     </CategoryItem>
-                    <CategoryItem onClick={clickEvent}>
+                    <CategoryItem
+                        onMouseOver={() => handleMouseOver('pick')}
+                        onMouseOut={() => handleMouseOut('pick')}>
                         <CategoryItemIcon src={categoryImg2Ori}/>
                         <CategoryTitleText> 컬리의 추천 </CategoryTitleText>
+                        <SubCategoryList
+                            className={isHoverPick ? 'open' : 'hide'}>
+                            {SubCategorySec.map((item) => (
+                                <SubCategoryItem> {item} </SubCategoryItem>
+                            ))}
+                        </SubCategoryList>
                     </CategoryItem>
                 </CateList>
             </SubContainer>
@@ -76,12 +101,14 @@ const CategoryItemIcon = styled.img`
 const CategoryTitleText = styled.div`
     flex: 1 1 0%;
     padding: 1px 20px 0px 10px;
-    color: rgb(51, 51, 51);
+    color: ${(props) => (props.className === 'open' ? `${palette.main}` : `rgb(51, 51, 51)`)};
     font-size: 14px;
-    font-weight: 400;
+    font-weight: ${(props) => (props.className === 'open' ? 500 : 400)};;
     line-height: 22px;
 `;
 const SubCategoryList = styled.ul`
+    display: ${(props) => (props.className === 'open' ? 'block' : 'none')};
+    background-color: ${(props) => (props.className === 'open' ? `rgb(247, 247, 247)` : 'none')};
     width: 266px;
     height: 100%;
     position: absolute;
