@@ -95,10 +95,12 @@ const Header = () => {
                         <DeliveryKeepIcon 
                             src={deliveryBtn}
                             onMouseOver={() => handleMouseOver('deli')}
-                            onMouseOut={() => handleMouseOut('deli')}
+                            // onMouseOut={() => handleMouseOut('deli')}
                         />
                         <DeliveryMenu 
                             className={isHoverDelivery ? 'open' : 'close'}
+                            onMouseOver={() => handleMouseOver('deli')}
+                            onMouseOut={() => handleMouseOut('deli')}
                             close={isHoverDelivery}>
                                 <DeliveryArea> 
                                     <DeliverySubArea>
@@ -311,7 +313,8 @@ const DeliverySubArea = styled.div`
     position: absolute;
     right: -124px;
     top: 14px;
-    width: 267px;
+    /* width: 267px; */
+    width: 232px;
     padding: 18px 17px 17px;
     border: 1px solid rgb(221, 221, 221);
     background-color: ${palette.white};
@@ -350,7 +353,8 @@ const DeliveryLoginBtn = styled.button`
     padding-bottom: 1px;
     text-align: center;
     overflow: hidden;
-    width: 110px;
+    /* width: 110px; */
+    width: 80px;
     height: 36px;
     border-radius: 3px;
     color: rgb(95, 0, 128);
@@ -358,6 +362,7 @@ const DeliveryLoginBtn = styled.button`
     border: 1px solid ${palette.main};
     font-weight: 500;
     font-size: 12px;
+    cursor: pointer;
 `;
 const DeliveryAddressBtn = styled.button`
     display: block;
@@ -378,6 +383,7 @@ const AddressImg = styled.img`
     height: 20px;
     margin-left: -9px;
     vertical-align: -5px;
+    cursor: pointer;
 `;
 const CartIcon = styled.img`
     width: 36px;
