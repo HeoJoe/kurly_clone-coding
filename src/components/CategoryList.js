@@ -5,6 +5,7 @@ import palette from "../styles/palette";
 import categoryImg1Ori from '../assets/img_categoryImg1_ori.png';
 import categoryImg2Ori from '../assets/img_categoryImg2_ori.png';
 import categoryImg1Click from '../assets/img_categoryImg1_click.png';
+import categoryImg2Click from '../assets/ic_categoryImg2_click.png';
 
 const CategoryList = () => {
     const [isHoverFruit, setIsHoverFruit] = useState(false);
@@ -30,15 +31,15 @@ const handleMouseOut = ( name ) => {
 
     return (
         <Container>
-            <SubContainer>
+            <SubContainer isHoverMouse={isHoverFruit || isHoverPick}>
                 <CateList>
                     <CategoryItem
                         onMouseOver={() => handleMouseOver('fruit')}
-                        onMouseOut={() => handleMouseOut('fruit')}>
+                        onMouseOut={() => handleMouseOut('fruit')}
+                        isOpen={isHoverFruit}>
                         <CategoryItemIcon src={isHoverFruit ? categoryImg1Click : categoryImg1Ori}/>
-                        <CategoryTitleText> 과일·견과·쌀 </CategoryTitleText>
-                        <SubCategoryList
-                            className={isHoverFruit ? 'open' : 'hide'}>
+                        <CategoryTitleText isOpen={isHoverFruit}> 과일·견과·쌀 </CategoryTitleText>
+                        <SubCategoryList isOpen={isHoverFruit}>
                             {SubCategoryFirst.map((item) => (
                                 <SubCategoryItem> {item} </SubCategoryItem>
                             ))}
@@ -46,11 +47,11 @@ const handleMouseOut = ( name ) => {
                     </CategoryItem>
                     <CategoryItem
                         onMouseOver={() => handleMouseOver('pick')}
-                        onMouseOut={() => handleMouseOut('pick')}>
-                        <CategoryItemIcon src={categoryImg2Ori}/>
-                        <CategoryTitleText> 컬리의 추천 </CategoryTitleText>
-                        <SubCategoryList
-                            className={isHoverPick ? 'open' : 'hide'}>
+                        onMouseOut={() => handleMouseOut('pick')}
+                        isOpen={isHoverPick}>
+                        <CategoryItemIcon src={isHoverPick ? categoryImg2Click : categoryImg2Ori}/>
+                        <CategoryTitleText isOpen={isHoverPick}> 컬리의 추천 </CategoryTitleText>
+                        <SubCategoryList isOpen={isHoverPick}>
                             {SubCategorySec.map((item) => (
                                 <SubCategoryItem> {item} </SubCategoryItem>
                             ))}
@@ -73,7 +74,7 @@ const SubContainer = styled.div`
     position: relative;
     background-color: ${palette.white}
     z-index: 299;
-    width: 517px;
+    width: ${(props) => props.isHoverMouse ? '512px' : `auto`};
     border: 1px solid rgb(221, 221, 221);
     animation: 0.2s linear 0s 1 normal none running animation-tb0mmg;
 `;
@@ -90,8 +91,8 @@ const CategoryItem = styled.li`
     padding: 7px 0px 9px 14px;
     display: flex;
     flex-wrap: wrap;
-    align-items: flex-start;
-    /* background-color: rgb(247, 247, 247); */
+    align-items: center;
+    background-color: ${(props) => (props.isOpen ? `#F7F7F7` : 'none')};;
 `;
 const CategoryItemIcon = styled.img`
     flex: 0 1 0%;
@@ -101,20 +102,20 @@ const CategoryItemIcon = styled.img`
 const CategoryTitleText = styled.div`
     flex: 1 1 0%;
     padding: 1px 20px 0px 10px;
-    color: ${(props) => (props.className === 'open' ? `${palette.main}` : `rgb(51, 51, 51)`)};
+    color: ${(props) => (props.isOpen ? `${palette.main}` : `#333333`)};
     font-size: 14px;
-    font-weight: ${(props) => (props.className === 'open' ? 500 : 400)};;
+    font-weight: ${(props) => (props.isOpen ? 500 : 400)};;
     line-height: 22px;
 `;
 const SubCategoryList = styled.ul`
-    display: ${(props) => (props.className === 'open' ? 'block' : 'none')};
-    background-color: ${(props) => (props.className === 'open' ? `rgb(247, 247, 247)` : 'none')};
+    display: ${(props) => (props.isOpen ? 'block' : 'none')};
+    background-color: ${(props) => (props.isOpen ? `#F7F7F7` : 'none')};
     width: 266px;
     height: 100%;
     position: absolute;
     overflow-x: hidden;
     overflow-y: scroll;
-    top: -1px;
+    top: 0px;
     left: 247px;
     z-index: 298;
     padding: 0;
