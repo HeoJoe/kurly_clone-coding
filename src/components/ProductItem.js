@@ -1,6 +1,8 @@
 import styled from "styled-components";
-import cartImg from '../assets/ic_CartBtn.svg';
 import palette from "../styles/palette";
+
+import cartImg from '../assets/ic_CartBtn.svg';
+import reviewImg from '../assets/ic_reviewImg.svg';
 
 const ProductItem = ({ img, title, costPrice, discountRate, review }) => {
     const addComma = (price) => {
@@ -34,6 +36,10 @@ const ProductItem = ({ img, title, costPrice, discountRate, review }) => {
                 ) : (
                     <SalesPrice> {addComma(FormattPrice())}원 </SalesPrice>
                 )}
+                <ProductReviewContainer>
+                    <ReviewIcon src={reviewImg}/>
+                    <ReviewInfo> {review} </ReviewInfo>
+                </ProductReviewContainer>
             </ProductInfoContainer>
         </Container>
     );
@@ -72,6 +78,7 @@ const KeepBtnContainer = styled.button`
     background-color: ${palette.white};
     border: 1px solid rgb(221, 221, 221);
     border-radius: 4px;
+    cursor: pointer;
 `;
 const CartImg = styled.img`
     width: 20px;
@@ -125,5 +132,25 @@ const SalesPrice = styled.div`
     font-weight: 800;
     line-height: 1.5;
     white-space: nowrap;
+`;
+const ProductReviewContainer = styled.div`
+    padding-top: 8px;
+    font-size: 13px;
+    line-height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+`;
+const ReviewIcon = styled.img`
+    width: 15px;
+    height: 15px;
+    margin-top: -2px;
+`;
+const ReviewInfo = styled.div`
+    padding-left: 2px;
+    font-weight: 400;
+    font-size: 13px;
+    line-height: 20px;
+    color: rgb(153, 153, 153);
 `;
 export default ProductItem;

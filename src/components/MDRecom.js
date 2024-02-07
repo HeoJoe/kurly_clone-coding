@@ -147,9 +147,8 @@ const ProductListSub = styled.div`
     width: 1050px;
     margin: 0px auto;
     overflow: hidden;
-
-    transform: translate3d(0px, 0px, 0px);
-    transition-duration: 0ms;
+    display: flex;
+    flex-direction: row;
 `;
 const MoreBtn = styled.button`
     margin: 0 auto;
