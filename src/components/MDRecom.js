@@ -1,9 +1,61 @@
 import { useState } from "react";
 import styled from "styled-components";
 import palette from "../styles/palette";
+import ProductItem from "./ProductItem";
+
+import productImg1 from '../assets/ProductImg/img_product1.jpg';
+import productImg2 from '../assets/ProductImg/img_product2.jpg';
+import productImg3 from '../assets/ProductImg/img_product3.jpeg';
+import productImg4 from '../assets/ProductImg/img_product4.jpg';
+import productImg5 from '../assets/ProductImg/img_product5.jpg';
+import productImg6 from '../assets/ProductImg/img_product6.jpg';
 
 const MDRecom = () => {
     const RecomLists = ['간편식·밀키트·샐러드', '과일·견과·쌀', '국·반찬·메인요리', '헤어·바디·구강', '정육·가공육·계란', '생수·음료·커피', '베이커리'];
+    const ProductLists = [
+        {
+            img: productImg1, 
+            title: '[이화수] 육개장 칼국수', 
+            costPrice: 8900,
+            discountRate: 30,
+            review: 158,
+        },
+        {
+            img: productImg2, 
+            title: '[모두의맛집] 김씨육면 청돈육면', 
+            costPrice: 8500,
+            discountRate: 37,
+            review: 64,
+        },
+        {
+            img: productImg3, 
+            title: '[올마레] 춘천 국물 닭갈비 떡볶이', 
+            costPrice: 13200,
+            discountRate: 16,
+            review: 123,
+        },
+        {
+            img: productImg4, 
+            title: '[레스토랑 Allen] 라구 에그 생면 파스타', 
+            costPrice: 9800,
+            discountRate: 0,
+            review: 123,
+        },
+        {
+            img: productImg5, 
+            title: '[오마뎅] 우리 사과 떡볶이', 
+            costPrice: 6900,
+            discountRate: 0,
+            review: 313,
+        },
+        {
+            img: productImg6, 
+            title: '[연남 쌉 : SAAP] 팟타이 2인분', 
+            costPrice: 16800,
+            discountRate: 12,
+            review: 591,
+        }
+    ]
 
     const [isClick, setIsClick] = useState(false);
     const [saveIdx, setSaveIdx] = useState(0);
@@ -28,7 +80,17 @@ const MDRecom = () => {
                 ))}
             </CategoryTitleList>
             <ProductList>
-
+                <ProductListSub>
+                    {ProductLists.map((item) => (
+                        <ProductItem 
+                            img={item.img}
+                            title={item.title}
+                            costPrice={item.costPrice}
+                            discountRate={item.discountRate}
+                            review={item.review}
+                        />
+                    ))}
+                </ProductListSub>
             </ProductList>
             <MoreBtn> 전체보기 </MoreBtn>
         </Container>
@@ -79,6 +141,15 @@ const CategoryTitleItem = styled.button`
 `;
 const ProductList = styled.div`
     margin: 20px 0 27px;
+`;
+const ProductListSub = styled.div`
+    position: relative;
+    width: 1050px;
+    margin: 0px auto;
+    overflow: hidden;
+
+    transform: translate3d(0px, 0px, 0px);
+    transition-duration: 0ms;
 `;
 const MoreBtn = styled.button`
     margin: 0 auto;
