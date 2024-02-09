@@ -7,8 +7,10 @@ import banner2 from '../assets/BannerImg/banner2.jpg';
 import banner3 from '../assets/BannerImg/banner3.jpg';
 import banner4 from '../assets/BannerImg/banner4.jpg';
 import ArrowBtn from '../assets/ic_arrowBtn.svg';
+import { useState } from "react";
 
 const AdBanner = () => {
+const [page, setPage] = useState(1);
     return (
         <Container>
             <Swiper
@@ -32,7 +34,7 @@ const AdBanner = () => {
             <LeftBtn src={ArrowBtn}/>
             <RighttBtn src={ArrowBtn}/>
             <SequenceArea>
-                1 / 4
+                {page} / 4
             </SequenceArea>
         </Container>
     )
