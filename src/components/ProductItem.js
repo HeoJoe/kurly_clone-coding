@@ -5,7 +5,7 @@ import cartImg from '../assets/ic_CartBtn.svg';
 import reviewImg from '../assets/ic_reviewImg.svg';
 
 const ProductItem = ({ img, title, costPrice, discountRate, review }) => {
-    const addComma = (price) => {
+    const AddComma = (price) => {
         const returnPrice = price?.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ",");
         return returnPrice;
     }
@@ -27,14 +27,14 @@ const ProductItem = ({ img, title, costPrice, discountRate, review }) => {
                 <ProductTitleText> {title} </ProductTitleText>
                 {discountRate != 0 ? (
                     <ProductPriceContainer>
-                    <CostPriceInfo> {addComma(costPrice)}원 </CostPriceInfo>
+                    <CostPriceInfo> {AddComma(costPrice)}원 </CostPriceInfo>
                     <DiscountInfo>
                         <DiscountRate> {discountRate}% </DiscountRate>
-                        <SalesPrice> {addComma(FormattPrice())}원 </SalesPrice>
+                        <SalesPrice> {AddComma(FormattPrice())}원 </SalesPrice>
                     </DiscountInfo>
                     </ProductPriceContainer>
                 ) : (
-                    <SalesPrice> {addComma(FormattPrice())}원 </SalesPrice>
+                    <SalesPrice> {AddComma(FormattPrice())}원 </SalesPrice>
                 )}
                 <ProductReviewContainer>
                     <ReviewIcon src={reviewImg}/>
