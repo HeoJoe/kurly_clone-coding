@@ -11,6 +11,7 @@ import { useState } from "react";
 
 const AdBanner = () => {
 const [page, setPage] = useState(1);
+
     return (
         <Container>
             <Swiper
