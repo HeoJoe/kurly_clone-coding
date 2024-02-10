@@ -12,6 +12,13 @@ import { useState } from "react";
 const AdBanner = () => {
 const [page, setPage] = useState(1);
 
+const BannerRightClick = (direction) => {
+    if (direction === 'left' && page > 1)
+        setPage(page - 1);
+    if (direction === 'right' && page < 4)
+        setPage(page + 1);
+}
+
     return (
         <Container>
             <Swiper
@@ -32,8 +39,14 @@ const [page, setPage] = useState(1);
                     <SlideImg src={banner4}/>
                 </SwiperSlide>
             </Swiper>
-            <LeftBtn src={ArrowBtn}/>
-            <RighttBtn src={ArrowBtn}/>
+            <LeftBtn 
+                src={ArrowBtn}
+                onClick={() => BannerRightClick('left')}
+            />
+            <RighttBtn 
+                src={ArrowBtn}
+                onClick={() => BannerRightClick('right')}
+            />
             <SequenceArea>
                 {page} / 4
             </SequenceArea>
