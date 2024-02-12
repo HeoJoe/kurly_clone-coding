@@ -12,7 +12,7 @@ import { useState } from "react";
 const AdBanner = () => {
 const [page, setPage] = useState(1);
 
-const BannerRightClick = (direction) => {
+const BannerClick = (direction) => {
     if (direction === 'left' && page > 1)
         setPage(page - 1);
     if (direction === 'right' && page < 4)
@@ -41,11 +41,11 @@ const BannerRightClick = (direction) => {
             </Swiper>
             <LeftBtn 
                 src={ArrowBtn}
-                onClick={() => BannerRightClick('left')}
+                onClick={() => BannerClick('left')}
             />
             <RighttBtn 
                 src={ArrowBtn}
-                onClick={() => BannerRightClick('right')}
+                onClick={() => BannerClick('right')}
             />
             <SequenceArea>
                 {page} / 4
