@@ -1,3 +1,4 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from 'swiper/react';
 import palette from "../styles/palette";
@@ -7,11 +8,11 @@ import banner2 from '../assets/BannerImg/banner2.jpg';
 import banner3 from '../assets/BannerImg/banner3.jpg';
 import banner4 from '../assets/BannerImg/banner4.jpg';
 import ArrowBtn from '../assets/ic_arrowBtn.svg';
-import { useState } from "react";
 
 const AdBanner = () => {
 const [page, setPage] = useState(1);
 
+// 광고 배너 페이지 이동
 const BannerClick = (direction) => {
     if (direction === 'left' && page > 1)
         setPage(page - 1);
