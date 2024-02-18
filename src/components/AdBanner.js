@@ -12,7 +12,6 @@ import ArrowBtn from '../assets/ic_arrowBtn.svg';
 const AdBanner = () => {
 const [page, setPage] = useState(1);
 
-// 광고 배너 페이지 이동
 const BannerClick = (direction) => {
     if (direction === 'left' && page > 1)
         setPage(page - 1);
