@@ -1,6 +1,11 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Swiper, SwiperSlide } from 'swiper/react';
+// import 'swiper/css/swiper.css';
+// import 'swiper/css/navigation.css';
+// import 'swiper/css/pagination.css';
+// import SwiperCore, { Navigation, Pagination } from 'swiper';
+
 import palette from "../styles/palette";
 
 import banner1 from '../assets/BannerImg/banner1.jpg';
@@ -10,7 +15,10 @@ import banner4 from '../assets/BannerImg/banner4.jpg';
 import ArrowBtn from '../assets/ic_arrowBtn.svg';
 
 const AdBanner = () => {
+const [swiper, setSwiper] = useState(null);
 const [page, setPage] = useState(1);
+
+// SwiperCore.use([Navigation, Pagination]);
 
 const BannerClick = (direction) => {
     if (direction === 'left' && page > 1)
@@ -19,11 +27,20 @@ const BannerClick = (direction) => {
         setPage(page + 1);
 }
 
+const swiperParams = {
+    navigation: true,
+    onSwiper: setSwiper,
+    onSlideChange: (e) => setPage(e.activeIndex),
+}
     return (
         <Container>
             <Swiper
+                {...swiperParams}
+                ref={setSwiper}
                 spaceBetween={50}
                 slidesPerView={1}
+                scrollbar={{draggable: false}}
+                navigation
                 pagination={{clickable: true}}
                 autoplay={{delay: 2000}}>
                 <SwiperSlide>
@@ -58,7 +75,6 @@ const Container = styled.div`
     position: relative;
     height: 370px;
     width: 100%;
-    /* height: 100%; */
     margin: 0px auto 40px;
     overflow: hidden;
     list-style: none;

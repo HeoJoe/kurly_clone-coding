@@ -83,6 +83,7 @@ const KeepBtnContainer = styled.button`
 const CartImg = styled.img`
     width: 20px;
     height: 20px;
+    margin-right: 4px;
 `;
 const ProductInfoContainer = styled.div`
     position: relative;
