@@ -3,7 +3,6 @@ import palette from "../styles/palette";
 
 import cartImg from '../assets/ic_CartBtn.svg';
 import reviewImg from '../assets/ic_reviewImg.svg';
-import ArrowBtn from '../assets/ic_MoreBtn.svg';
 
 const ProductItem = ({ img, title, costPrice, discountRate, review }) => {
     const AddComma = (price) => {
@@ -42,7 +41,6 @@ const ProductItem = ({ img, title, costPrice, discountRate, review }) => {
                     <ReviewInfo> {review} </ReviewInfo>
                 </ProductReviewContainer>
             </ProductInfoContainer>
-            <MoreBtn src={ArrowBtn}/>
         </Container>
     );
 };
@@ -155,18 +153,5 @@ const ReviewInfo = styled.div`
     font-size: 13px;
     line-height: 20px;
     color: rgb(153, 153, 153);
-`;
-const MoreBtn = styled.img`
-    position: absolute;
-    top: 160px;
-    right: 0px;
-    width: 60px;
-    height: 60px;
-    z-index: 300;
-    border: 0px;
-    outline: 0px;
-    transition: background 0.5s ease 0s;
-    transform: translate(50%, -50%) rotate(180deg);
-    cursor: pointer;
 `;
 export default ProductItem;
