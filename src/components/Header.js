@@ -4,13 +4,13 @@ import palette from '../styles/palette';
 
 import titleImg from '../assets/img_TitleImg.svg'
 import searchBtn from '../assets/ic_SearchBtn.svg'
-import cancelBtn from '../assets/ic_cancelBtn.svg';
+import cancelBtn from '../assets/ic_CancelBtn.svg';
 import deliveryBtn from '../assets/ic_DeliveryBtn.svg';
 import keepBtn from '../assets/ic_KeepBtn.svg';
 import cartBtn from '../assets/ic_CartBtn.svg';
-import downBtn from '../assets/ic_downBtn.png';
+import downBtn from '../assets/ic_DownBtn.png';
 import searchImg from '../assets/img_SearchImg.png'
-import CategoryImg from '../assets/ic_categoryImg.svg';
+import CategoryImg from '../assets/ic_CategoryImg.svg';
 import CategoryList from './CategoryList';
 
 const Header = () => {

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import palette from "../styles/palette";
 
 import cartImg from '../assets/ic_CartBtn.svg';
-import reviewImg from '../assets/ic_reviewImg.svg';
+import reviewImg from '../assets/ic_ReviewImg.svg';
 
 const ProductItem = ({ img, title, costPrice, discountRate, review }) => {
     const AddComma = (price) => {

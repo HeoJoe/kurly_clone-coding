@@ -2,10 +2,10 @@ import { useState } from "react";
 import styled from "styled-components";
 import palette from "../styles/palette";
 
-import categoryImg1Ori from '../assets/img_categoryImg1_ori.png';
-import categoryImg2Ori from '../assets/img_categoryImg2_ori.png';
-import categoryImg1Click from '../assets/img_categoryImg1_click.png';
-import categoryImg2Click from '../assets/ic_categoryImg2_click.png';
+import categoryImg1Ori from '../assets/img_CategoryImg1_ori.png';
+import categoryImg2Ori from '../assets/img_CategoryImg2_ori.png';
+import categoryImg1Click from '../assets/img_CategoryImg1_click.png';
+import categoryImg2Click from '../assets/ic_CategoryImg2_click.png';
 
 import categorySubImg1 from '../assets/CategoryImg/img_category1.png';
 import categorySubImg2 from '../assets/CategoryImg/img_category2.jpg';

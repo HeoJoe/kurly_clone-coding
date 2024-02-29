@@ -12,7 +12,7 @@ import banner1 from '../assets/BannerImg/banner1.jpg';
 import banner2 from '../assets/BannerImg/banner2.jpg';
 import banner3 from '../assets/BannerImg/banner3.jpg';
 import banner4 from '../assets/BannerImg/banner4.jpg';
-import ArrowBtn from '../assets/ic_arrowBtn.svg';
+import ArrowBtn from '../assets/ic_ArrowBtn.svg';
 
 const AdBanner = () => {
 const [swiper, setSwiper] = useState(null);
