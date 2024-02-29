@@ -60,9 +60,13 @@ const MDRecom = () => {
 
     const [isClick, setIsClick] = useState(false);
     const [saveIdx, setSaveIdx] = useState(0);
+    const [cursorIdx, setCursorIdx] = useState(0);
 
     const handleOnClick = ( idx ) => {
         setSaveIdx(idx);
+    }
+    const handleOnMouseOver = ( idx ) => {
+        setCursorIdx(idx);
     }
 
     return (
@@ -75,7 +79,9 @@ const MDRecom = () => {
                     <CategoryTitleItem 
                         key={idx}
                         onClick={() => handleOnClick(idx)}
-                        isShow={saveIdx === idx}
+                        onMouseOver={() => handleOnMouseOver(idx)}
+                        isClick={saveIdx === idx}
+                        isMouseOver={cursorIdx === idx}
                     > {item} 
                     </CategoryTitleItem>
                 ))}
@@ -129,8 +135,14 @@ const CategoryTitleList = styled.ul`
 `;
 const CategoryTitleItem = styled.button`
     box-sizing: border-box;
-    background-color: ${(props) => (props.isShow ? 'rgb(95, 0, 128)' : 'rgb(247, 247, 247)')};
-    color: ${(props) => (props.isShow ? 'rgb(255, 255, 255)' : 'rgb(51, 51, 51)')};
+    background-color: ${(props) => (
+        props.isClick ? 'rgb(95, 0, 128)' : 
+        (props.isMouseOver ? 'rgb(247, 243, 248)' : 'rgb(247, 247, 247)')
+    )};
+    color: ${(props) => (
+        props.isClick ? 'rgb(255, 255, 255)' : 
+        (props.isMouseOver ? 'rgb(95, 0, 128)' : 'rgb(51, 51, 51)')
+    )};
     display: block;
     padding: 10px 20px;
     border: none;
@@ -156,7 +168,6 @@ const ArrowBtn = styled.img`
     position: absolute;
     top: 970px;
     right: 245px;
-    /* background-color: antiquewhite; */
     width: 60px;
     height: 60px;
     overflow: visible;
