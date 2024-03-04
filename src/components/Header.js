@@ -18,6 +18,7 @@ const Header = () => {
     const [isHoverDelivery, setIsHoverDelivery] = useState(false);
     const [isHoverCategory, setIsHoverCategory] = useState(false);
     const [search, setSearch] = useState('');
+    const [scrollY, setScrollY] = useState(0);
 
     const MoreMenuTitle = ['공지사항', '자주하는 질문', '1:1 문의', '대량주문 문의'];
     const ProductMenuTitle = ['신상품', '베스트', '알뜰쇼핑', '특가/혜택'];
@@ -26,9 +27,20 @@ const Header = () => {
         setSearch(e.target.value);
     };
 
+    // 현재 스크롤 Y축 위치를 넣음
+    const onScroll = () => {
+        setScrollY(window.screenY);
+    };
+
     const onClickRemoveBtn = () => {
         setSearch('');
     };
+
+    useEffect(() => {
+        window.addEventListener('scroll', onScroll);
+        return() => window.removeEventListener('scroll', onScroll);
+    }, []);
+    // return scrollY;
 
     const handleMouseOver = ( name ) => {
         if (name === 'menu') 
@@ -51,108 +63,116 @@ const Header = () => {
 
     return (
         <Container>
-            <SubContainer>
-                <HeaderTop>
-                    <SubMenu style={{ color: `${palette.main}` }}> 회원가입 </SubMenu>
-                    <GrayLine/>
-                    <SubMenu> 로그인 </SubMenu>
-                    <GrayLine/>
-                    <CustomerService>
-                        <SubMenu> 고객센터 </SubMenu>
-                        <MoreBtn 
-                            onMouseOver={() => handleMouseOver('menu')}
-                            onMouseOut={() => handleMouseOut('menu')}
-                            src={downBtn}/>
-                        <MoreMenuList 
-                            className={isHoverMenu ? 'open' : 'close'}
-                            close={isHoverMenu}>
-                            {MoreMenuTitle.map((item) => (
-                                <MoreMenu> {item} </MoreMenu>
-                            ))}
-                        </MoreMenuList>
-                    </CustomerService>
-                </HeaderTop>
-                <HeaderMid>
-                    <SubHeaderMid>
-                        <TitleImg src={titleImg}/>
-                        <TitleText> 마켓컬리 </TitleText>
-                    </SubHeaderMid>
-                    <SearchContainer>
-                        <InputBox
-                            type='text'
-                            value={search}
-                            placeholder='검색어를 입력해주세요'
-                            onChange={onChange}
-                        />
-                        <CancelBtn 
-                            src={cancelBtn}
-                            className={search ? 'open' : 'hide'}
-                            onClick={onClickRemoveBtn}
-                        />
-                        <SearchBtn src={searchBtn}/>
-                    </SearchContainer>
-                    <IconContainer>
-                        <DeliveryKeepIcon 
-                            src={deliveryBtn}
-                            onMouseMove={() => handleMouseOver('deli')}
-                            onMouseOut={() => handleMouseOut('deli')}
-                        />
-                        <DeliveryMenu 
-                            className={isHoverDelivery ? 'open' : 'close'}
-                            onMouseOver={() => handleMouseOver('deli')}
-                            onMouseOut={() => handleMouseOut('deli')}
-                            close={isHoverDelivery}>
-                                <DeliveryArea> 
-                                    <DeliverySubArea>
-                                        <DeliveryTextArea>
-                                            <DeliveryFirstText> 배송지를 등록</DeliveryFirstText>
-                                            하고
-                                            <br/>
-                                            <DeliverySecText> 구매 가능한 상품을 확인하세요! </DeliverySecText>
-                                        </DeliveryTextArea>
-                                        <DeliveryBtnArea>
-                                            <DeliveryLoginBtn> 로그인 </DeliveryLoginBtn>
-                                            <DeliveryAddressBtn> 
-                                                <AddressImg src={searchImg}/>
-                                                주소 검색 
-                                            </DeliveryAddressBtn>
-                                        </DeliveryBtnArea>
-                                    </DeliverySubArea>
-                                </DeliveryArea>
-                        </DeliveryMenu>
-                        <DeliveryKeepIcon src={keepBtn}/>
-                        <CartIcon src={cartBtn}/>
-                    </IconContainer>
-                </HeaderMid>
-            </SubContainer>
-            <HeaderBottom>
-                <HeaderSubBottom>
-                    <CategoryContainer
-                        onMouseOver={() => handleMouseOver('cate')}
-                        onMouseOut={() => handleMouseOut('cate')}
-                    >
-                        <CateImg src={CategoryImg}/>
-                        <CateText> 카테고리 </CateText>
-                        {isHoverCategory && <CategoryList/>}
-                    </CategoryContainer>
-                    <ProductMenuList>
-                        {ProductMenuTitle.map((item) => (
-                            <ProductMenuItem>
-                                <ProductMenuText> {item} </ProductMenuText>
-                            </ProductMenuItem>
-                        ))}
-                    </ProductMenuList>
-                    <DeliveryNotice>
-                        <NoticeText> 샛별・하루 </NoticeText> &nbsp; 배송안내
-                    </DeliveryNotice>
-                </HeaderSubBottom>
-             </HeaderBottom>
+            {scrollY == 0 && (
+                <>
+                    <SubContainer>
+                        <HeaderTop>
+                            <SubMenu style={{ color: `${palette.main}` }}> 회원가입 </SubMenu>
+                            <GrayLine/>
+                            <SubMenu> 로그인 </SubMenu>
+                            <GrayLine/>
+                            <CustomerService>
+                                <SubMenu> 고객센터 </SubMenu>
+                                <MoreBtn 
+                                    onMouseOver={() => handleMouseOver('menu')}
+                                    onMouseOut={() => handleMouseOut('menu')}
+                                    src={downBtn}/>
+                                <MoreMenuList 
+                                    className={isHoverMenu ? 'open' : 'close'}
+                                    close={isHoverMenu}>
+                                    {MoreMenuTitle.map((item) => (
+                                        <MoreMenu> {item} </MoreMenu>
+                                    ))}
+                                </MoreMenuList>
+                            </CustomerService>
+                        </HeaderTop>
+                        <HeaderMid>
+                            <SubHeaderMid>
+                                <TitleImg src={titleImg}/>
+                                <TitleText> 마켓컬리 </TitleText>
+                            </SubHeaderMid>
+                            <SearchContainer>
+                                <InputBox
+                                    type='text'
+                                    value={search}
+                                    placeholder='검색어를 입력해주세요'
+                                    onChange={onChange}
+                                />
+                                <CancelBtn 
+                                    src={cancelBtn}
+                                    className={search ? 'open' : 'hide'}
+                                    onClick={onClickRemoveBtn}
+                                />
+                                <SearchBtn src={searchBtn}/>
+                            </SearchContainer>
+                            <IconContainer>
+                                <DeliveryKeepIcon 
+                                    src={deliveryBtn}
+                                    onMouseMove={() => handleMouseOver('deli')}
+                                    onMouseOut={() => handleMouseOut('deli')}
+                                />
+                                <DeliveryMenu 
+                                    className={isHoverDelivery ? 'open' : 'close'}
+                                    onMouseOver={() => handleMouseOver('deli')}
+                                    onMouseOut={() => handleMouseOut('deli')}
+                                    close={isHoverDelivery}>
+                                        <DeliveryArea> 
+                                            <DeliverySubArea>
+                                                <DeliveryTextArea>
+                                                    <DeliveryFirstText> 배송지를 등록</DeliveryFirstText>
+                                                    하고
+                                                    <br/>
+                                                    <DeliverySecText> 구매 가능한 상품을 확인하세요! </DeliverySecText>
+                                                </DeliveryTextArea>
+                                                <DeliveryBtnArea>
+                                                    <DeliveryLoginBtn> 로그인 </DeliveryLoginBtn>
+                                                    <DeliveryAddressBtn> 
+                                                        <AddressImg src={searchImg}/>
+                                                        주소 검색 
+                                                    </DeliveryAddressBtn>
+                                                </DeliveryBtnArea>
+                                            </DeliverySubArea>
+                                        </DeliveryArea>
+                                </DeliveryMenu>
+                                <DeliveryKeepIcon src={keepBtn}/>
+                                <CartIcon src={cartBtn}/>
+                            </IconContainer>
+                        </HeaderMid>
+                    </SubContainer>
+                    <HeaderBottom>
+                        <HeaderSubBottom>
+                            <CategoryContainer
+                                onMouseOver={() => handleMouseOver('cate')}
+                                onMouseOut={() => handleMouseOut('cate')}
+                            >
+                                <CateImg src={CategoryImg}/>
+                                <CateText> 카테고리 </CateText>
+                                {isHoverCategory && <CategoryList/>}
+                            </CategoryContainer>
+                            <ProductMenuList>
+                                {ProductMenuTitle.map((item) => (
+                                    <ProductMenuItem>
+                                        <ProductMenuText> {item} </ProductMenuText>
+                                    </ProductMenuItem>
+                                ))}
+                            </ProductMenuList>
+                            <DeliveryNotice>
+                                <NoticeText> 샛별・하루 </NoticeText> &nbsp; 배송안내
+                            </DeliveryNotice>
+                        </HeaderSubBottom>
+                    </HeaderBottom>
+                </>
+            )}
         </Container>
     )
 }
 const Container = styled.div`
+    position: sticky;
+    top: 0px;
+    z-index: 999;
     box-sizing: border-box;
     margin: 0;
+    background-color: ${palette.white};
 `;
 const SubContainer = styled.div`
     position: relative;

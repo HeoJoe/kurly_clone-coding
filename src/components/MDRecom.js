@@ -80,6 +80,7 @@ const MDRecom = () => {
                         key={idx}
                         onClick={() => handleOnClick(idx)}
                         onMouseOver={() => handleOnMouseOver(idx)}
+                        onMouseOut={() => handleOnMouseOver(null)}
                         isClick={saveIdx === idx}
                         isMouseOver={cursorIdx === idx}
                     > {item} 
