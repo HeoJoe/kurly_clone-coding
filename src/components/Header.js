@@ -17,6 +17,7 @@ const Header = () => {
     const [isHoverMenu, setIsHoverMenu] = useState(false);
     const [isHoverDelivery, setIsHoverDelivery] = useState(false);
     const [isHoverCategory, setIsHoverCategory] = useState(false);
+    const [isHoverSearch, setIsHoverSearch] = useState(false);
     const [search, setSearch] = useState('');
     const [scroll, setScroll] = useState(false);
 
@@ -46,6 +47,10 @@ const Header = () => {
         setSearch('');
     };
 
+    const handleClick = () => {
+        setIsHoverSearch(true);
+    }
+
     const handleMouseOver = ( name ) => {
         if (name === 'menu') 
             setIsHoverMenu(true);
@@ -53,7 +58,6 @@ const Header = () => {
             setIsHoverDelivery(true);
         if (name === 'cate') 
             setIsHoverCategory(true);
-
     };
 
     const handleMouseOut = ( name ) => {
@@ -63,6 +67,8 @@ const Header = () => {
             setIsHoverDelivery(false);
         if (name === 'cate') 
             setIsHoverCategory(false);
+        if (name === 'search')
+            setIsHoverSearch(false);
     };
 
     return (
@@ -86,11 +92,15 @@ const Header = () => {
                                 </ProductMenuItem>
                             ))}
                         </ProductMenuList>
-                        <ScrollSearchContainer>
+                        <ScrollSearchContainer
+                            onClick={() => handleClick('search')}
+                            onMouseOverCapture={() => handleMouseOut('search')}
+                            click={isHoverSearch}>
                             <InputBox
                                 type='text'
                                 value={search}
                                 scroll={scroll}
+                                click={isHoverSearch}
                                 placeholder='검색어를 입력해주세요'
                                 onChange={onChange}
                             />
@@ -355,7 +365,10 @@ const InputBox = styled.input`
     border: none;
     outline: none;      // 파란선 없애기
     margin-top: 2px;
-    
+    background-color: ${(props) => (
+        props.click ? '${palette.white}' :
+        (props.scroll ? 'rgb(247, 247, 247)' : 'none')
+    )};
     font-size: ${(props) => props.scroll ? '15px' : '17px'};
     letter-spacing: -0.33px;
 `;
@@ -576,9 +589,9 @@ const ScrollSearchContainer = styled.div`
     height: 35px;
     margin-right: 160px;
     padding-left: 14px;
-    /* border: 1.5px solid ${palette.main}; */
+    /* border: 1.5px solid rgb(247, 247, 247); */
     border-radius: 6px;
-    background-color: rgb(247, 247, 247);
+    background-color: ${(props) => props.click ? '${palette.white}' : 'rgb(247, 247, 247)'};
     box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
 `;
 export default Header;
