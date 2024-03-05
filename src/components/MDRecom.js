@@ -166,9 +166,9 @@ const ProductListSub = styled.div`
     flex-direction: row;
 `;
 const ArrowBtn = styled.img`
-    position: absolute;
-    top: 970px;
-    right: 245px;
+    position: relative;
+    bottom: 350px;
+    left: 990px;
     width: 60px;
     height: 60px;
     overflow: visible;
