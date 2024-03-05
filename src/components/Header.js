@@ -78,13 +78,61 @@ const Header = () => {
                             <CateText> 카테고리 </CateText>
                             {isHoverCategory && <CategoryList/>}
                         </CategoryContainer>
-                        <ProductMenuList>
+                        <ProductMenuList style={{ marginLeft: '-10px'}}>
                             {ProductMenuTitle.map((item) => (
-                                <ProductMenuItem>
+                                <ProductMenuItem style={{ marginRight: '-20px'}}>
                                     <ProductMenuText> {item} </ProductMenuText>
                                 </ProductMenuItem>
                             ))}
                         </ProductMenuList>
+                        <ScrollSearchContainer>
+                            <InputBox
+                                type='text'
+                                value={search}
+                                placeholder='검색어를 입력해주세요'
+                                onChange={onChange}
+                                style={{ fontSize: '15px'}}
+                            />
+                            <CancelBtn 
+                                src={cancelBtn}
+                                className={search ? 'open' : 'hide'}
+                                style={{ marginRight: '155px'}}
+                                onClick={onClickRemoveBtn}
+                            />
+                            <SearchBtn src={searchBtn}/>
+                        </ScrollSearchContainer>
+                        <IconContainer style={{ top: '10px' }}>
+                            <DeliveryKeepIcon 
+                                src={deliveryBtn}
+                                onMouseMove={() => handleMouseOver('deli')}
+                                onMouseOut={() => handleMouseOut('deli')}
+                            />
+                            <DeliveryMenu 
+                                className={isHoverDelivery ? 'open' : 'close'}
+                                onMouseOver={() => handleMouseOver('deli')}
+                                onMouseOut={() => handleMouseOut('deli')}
+                                close={isHoverDelivery}>
+                                <DeliveryArea> 
+                                    <DeliverySubArea>
+                                        <DeliveryTextArea>
+                                            <DeliveryFirstText> 배송지를 등록</DeliveryFirstText>
+                                            하고
+                                            <br/>
+                                            <DeliverySecText> 구매 가능한 상품을 확인하세요! </DeliverySecText>
+                                        </DeliveryTextArea>
+                                        <DeliveryBtnArea>
+                                            <DeliveryLoginBtn> 로그인 </DeliveryLoginBtn>
+                                            <DeliveryAddressBtn> 
+                                                <AddressImg src={searchImg}/>
+                                                주소 검색 
+                                            </DeliveryAddressBtn>
+                                        </DeliveryBtnArea>
+                                    </DeliverySubArea>
+                                </DeliveryArea>
+                            </DeliveryMenu>
+                            <DeliveryKeepIcon src={keepBtn}/>
+                            <CartIcon src={cartBtn}/>
+                        </IconContainer>
                     </HeaderSubBottom>
                 </ScrollHeaderContainer>
             ) : (
@@ -167,8 +215,7 @@ const Header = () => {
                         <HeaderSubBottom>
                             <CategoryContainer
                                 onMouseOver={() => handleMouseOver('cate')}
-                                onMouseOut={() => handleMouseOut('cate')}
-                            >
+                                onMouseOut={() => handleMouseOut('cate')}>
                                 <CateImg src={CategoryImg}/>
                                 <CateText> 카테고리 </CateText>
                                 {isHoverCategory && <CategoryList/>}
@@ -302,7 +349,7 @@ const SearchContainer = styled.div`
     box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
 `;
 const InputBox = styled.input`
-    width: 300px;
+    width: 200px;
     border: none;
     outline: none;      // 파란선 없애기
     margin-top: 2px;
@@ -323,7 +370,7 @@ const CancelBtn = styled.img`
 `;
 const SearchBtn = styled.img`
     position: relative;
-    margin: 8px;
+    margin-left: -30px;
     background: 0px 0px no-repeat;
     cursor: pointer;
 `;
@@ -474,7 +521,6 @@ const CateText = styled.p`
 `;
 const ProductMenuList = styled.ul`
     display: flex;
-    /* margin-left: 30px; */
     margin: 0 auto;
 `;
 const ProductMenuItem = styled.li`
@@ -508,11 +554,26 @@ const NoticeText = styled.p`
     font-weight: 500;
     color: ${palette.main};
 `;
+// 스크롤 시 헤더 상태
 const ScrollHeaderContainer = styled.div`
     position: relative;
     width: 100%;
     margin: 0px auto;
     letter-spacing: -0.3px;
     box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
+`;
+const ScrollSearchContainer = styled.div`
+    display: flex;
+    /* position: absolute; */
+    align-items: center;
+    justify-content: space-between;
+    width: 220px;
+    height: 35px;
+    margin-right: 160px;
+    padding-left: 14px;
+    /* border: 1.5px solid ${palette.main}; */
+    border-radius: 6px;
+    background-color: rgb(247, 247, 247);
+    box-shadow: rgb(247, 247, 247) 0px 0px 0px 1px inset;
 `;
 export default Header;
