@@ -18,7 +18,7 @@ const Header = () => {
     const [isHoverDelivery, setIsHoverDelivery] = useState(false);
     const [isHoverCategory, setIsHoverCategory] = useState(false);
     const [search, setSearch] = useState('');
-    const [scrollY, setScrollY] = useState(0);
+    const [scroll, setScroll] = useState(false);
 
     const MoreMenuTitle = ['공지사항', '자주하는 질문', '1:1 문의', '대량주문 문의'];
     const ProductMenuTitle = ['신상품', '베스트', '알뜰쇼핑', '특가/혜택'];
@@ -27,20 +27,24 @@ const Header = () => {
         setSearch(e.target.value);
     };
 
-    // 현재 스크롤 Y축 위치를 넣음
-    const onScroll = () => {
-        setScrollY(window.screenY);
-    };
+    useEffect(() => {
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
+    }, []);
+
+    const handleScroll = () => {
+        if(window.scrollY >= 38) {
+            setScroll(true);
+        } else {
+            setScroll(false);
+        }
+    }
 
     const onClickRemoveBtn = () => {
         setSearch('');
     };
-
-    useEffect(() => {
-        window.addEventListener('scroll', onScroll);
-        return() => window.removeEventListener('scroll', onScroll);
-    }, []);
-    // return scrollY;
 
     const handleMouseOver = ( name ) => {
         if (name === 'menu') 
@@ -63,7 +67,27 @@ const Header = () => {
 
     return (
         <Container>
-            {scrollY == 0 && (
+            {scroll ? (
+                <ScrollHeaderContainer>
+                    <HeaderSubBottom>
+                        <CategoryContainer
+                            onMouseOver={() => handleMouseOver('cate')}
+                            onMouseOut={() => handleMouseOut('cate')}
+                        >
+                            <CateImg src={CategoryImg}/>
+                            <CateText> 카테고리 </CateText>
+                            {isHoverCategory && <CategoryList/>}
+                        </CategoryContainer>
+                        <ProductMenuList>
+                            {ProductMenuTitle.map((item) => (
+                                <ProductMenuItem>
+                                    <ProductMenuText> {item} </ProductMenuText>
+                                </ProductMenuItem>
+                            ))}
+                        </ProductMenuList>
+                    </HeaderSubBottom>
+                </ScrollHeaderContainer>
+            ) : (
                 <>
                     <SubContainer>
                         <HeaderTop>
@@ -484,5 +508,8 @@ const DeliveryNotice = styled.div`
 const NoticeText = styled.p`
     font-weight: 500;
     color: ${palette.main};
+`;
+const ScrollHeaderContainer = styled.div`
+    
 `;
 export default Header;
