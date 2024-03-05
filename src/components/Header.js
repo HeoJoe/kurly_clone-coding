@@ -72,15 +72,16 @@ const Header = () => {
                     <HeaderSubBottom>
                         <CategoryContainer
                             onMouseOver={() => handleMouseOver('cate')}
-                            onMouseOut={() => handleMouseOut('cate')}
-                        >
+                            onMouseOut={() => handleMouseOut('cate')}>
                             <CateImg src={CategoryImg}/>
                             <CateText> 카테고리 </CateText>
                             {isHoverCategory && <CategoryList/>}
                         </CategoryContainer>
-                        <ProductMenuList style={{ marginLeft: '-10px'}}>
+                        <ProductMenuList 
+                            scroll={scroll}>
                             {ProductMenuTitle.map((item) => (
-                                <ProductMenuItem style={{ marginRight: '-20px'}}>
+                                <ProductMenuItem 
+                                scroll={scroll}>
                                     <ProductMenuText> {item} </ProductMenuText>
                                 </ProductMenuItem>
                             ))}
@@ -89,19 +90,20 @@ const Header = () => {
                             <InputBox
                                 type='text'
                                 value={search}
+                                scroll={scroll}
                                 placeholder='검색어를 입력해주세요'
                                 onChange={onChange}
-                                style={{ fontSize: '15px'}}
                             />
                             <CancelBtn 
                                 src={cancelBtn}
                                 className={search ? 'open' : 'hide'}
-                                style={{ marginRight: '155px'}}
                                 onClick={onClickRemoveBtn}
+                                scroll={scroll}
                             />
                             <SearchBtn src={searchBtn}/>
                         </ScrollSearchContainer>
-                        <IconContainer style={{ top: '10px' }}>
+                        <IconContainer
+                            scroll={scroll}>
                             <DeliveryKeepIcon 
                                 src={deliveryBtn}
                                 onMouseMove={() => handleMouseOver('deli')}
@@ -354,7 +356,7 @@ const InputBox = styled.input`
     outline: none;      // 파란선 없애기
     margin-top: 2px;
     
-    font-size: 17px;
+    font-size: ${(props) => props.scroll ? '15px' : '17px'};
     letter-spacing: -0.33px;
 `;
 const CancelBtn = styled.img`
@@ -366,6 +368,7 @@ const CancelBtn = styled.img`
     height: 16px;
     right: 47px;
     margin-left: 20px;
+    margin-right: ${(props) => props.scroll ? '155px' : 'none'};
     cursor: pointer;
 `;
 const SearchBtn = styled.img`
@@ -379,7 +382,7 @@ const IconContainer = styled.div`
     align-items: center;
     position: absolute;
     right: -6px;
-    top: 49px;
+    top: ${(props) => props.scroll ? '10px' : '49px'};
 `;
 const DeliveryKeepIcon = styled.img`
     width: 36px;
@@ -522,6 +525,7 @@ const CateText = styled.p`
 const ProductMenuList = styled.ul`
     display: flex;
     margin: 0 auto;
+    margin-left: ${(props) => props.scroll ? '-10px' : 'none'};
 `;
 const ProductMenuItem = styled.li`
     display: flex;
@@ -530,6 +534,7 @@ const ProductMenuItem = styled.li`
     height: 55px;
     line-height: 20px;
     text-align: center;
+    margin-right: ${(props) => props.scroll ? '-25px' : 'none'};
 `;
 const ProductMenuText = styled.p`
     height: fit-content;
