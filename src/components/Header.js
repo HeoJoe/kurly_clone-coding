@@ -35,7 +35,7 @@ const Header = () => {
     }, []);
 
     const handleScroll = () => {
-        if(window.scrollY >= 38) {
+        if(window.scrollY >= 50) {
             setScroll(true);
         } else {
             setScroll(false);
@@ -495,7 +495,6 @@ const ProductMenuText = styled.p`
 const DeliveryNotice = styled.div`
     display: flex;
     align-items: center;
-
     height: 32px;
     padding: 1px 14px 0 14px;
     border-radius: 18px;
@@ -510,6 +509,10 @@ const NoticeText = styled.p`
     color: ${palette.main};
 `;
 const ScrollHeaderContainer = styled.div`
-    
+    position: relative;
+    width: 100%;
+    margin: 0px auto;
+    letter-spacing: -0.3px;
+    box-shadow: rgba(0, 0, 0, 0.07) 0px 3px 4px 0px;
 `;
 export default Header;
