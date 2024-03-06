@@ -71,14 +71,7 @@ const DeliveryImg = styled.img`
 `;
 const SelectContainer = styled.div`
     width: 80px;
-    /* border-width: 1px 1px 0px; */
     border: 1px solid rgb(221, 221, 221);
-    /* border-top-style: solid;
-    border-right-style: solid;
-    border-left-style: solid;
-    border-top-color: rgb(221, 221, 221);
-    border-right-color: rgb(221, 221, 221);
-    border-left-color: rgb(221, 221, 221); */
     border-bottom-style: initial;
     border-bottom-color: initial;
     background-color: rgb(255, 255, 255);

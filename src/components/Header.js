@@ -3,7 +3,8 @@ import styled from 'styled-components';
 import palette from '../styles/palette';
 
 import titleImg from '../assets/img_TitleImg.svg'
-import searchBtn from '../assets/ic_SearchBtn.svg'
+import searchBtn1 from '../assets/ic_SearchBtn1.svg'
+import searchBtn2 from '../assets/ic_SearchBtn2.svg'
 import cancelBtn from '../assets/ic_CancelBtn.svg';
 import deliveryBtn from '../assets/ic_DeliveryBtn.svg';
 import keepBtn from '../assets/ic_KeepBtn.svg';
@@ -110,7 +111,7 @@ const Header = () => {
                                 onClick={onClickRemoveBtn}
                                 scroll={scroll}
                             />
-                            <SearchBtn src={searchBtn}/>
+                            <SearchBtn src={searchBtn2}/>
                         </ScrollSearchContainer>
                         <IconContainer
                             scroll={scroll}>
@@ -187,7 +188,7 @@ const Header = () => {
                                     className={search ? 'open' : 'hide'}
                                     onClick={onClickRemoveBtn}
                                 />
-                                <SearchBtn src={searchBtn}/>
+                                <SearchBtn src={searchBtn1}/>
                             </SearchContainer>
                             <IconContainer>
                                 <DeliveryKeepIcon 
