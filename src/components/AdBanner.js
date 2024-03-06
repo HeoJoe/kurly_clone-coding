@@ -83,7 +83,7 @@ const Container = styled.div`
 `;
 const SlideImg = styled.img`
     width: 100%;
-    height: 100%;
+    height: 370px;
     object-fit: cover;
     cursor: pointer;
 `;
