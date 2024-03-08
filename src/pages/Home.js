@@ -11,7 +11,6 @@ const Home = () => {
             <AdBanner/>
             <MDRecom/>
             <SmallAdnBanner/>
-            {/* (scroll && ) */}
         </Container>
     );
 }
