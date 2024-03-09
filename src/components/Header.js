@@ -103,14 +103,12 @@ const Header = () => {
                                 scroll={scroll}
                                 click={isHoverSearch}
                                 placeholder='검색어를 입력해주세요'
-                                onChange={onChange}
-                            />
+                                onChange={onChange}/>
                             <CancelBtn 
                                 src={cancelBtn}
                                 className={search ? 'open' : 'hide'}
                                 onClick={onClickRemoveBtn}
-                                scroll={scroll}
-                            />
+                                scroll={scroll}/>
                             <SearchBtn src={searchBtn2}/>
                         </ScrollSearchContainer>
                         <IconContainer

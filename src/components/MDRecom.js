@@ -95,8 +95,7 @@ const MDRecom = () => {
                             title={item.title}
                             costPrice={item.costPrice}
                             discountRate={item.discountRate}
-                            review={item.review}
-                        />
+                            review={item.review}/>
                     ))}
                 </ProductListSub>
             </ProductList>
